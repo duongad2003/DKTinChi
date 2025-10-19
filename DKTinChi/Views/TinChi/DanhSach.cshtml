@@ -1,0 +1,47 @@
+﻿@model List<DKTinChi.Models.modelDangKy>
+
+@{
+    ViewData["Title"] = "Danh sách tín chỉ đã đăng ký";
+}
+
+<h2>Danh sách tín chỉ đã đăng ký</h2>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">
+        Bạn chưa đăng ký tín chỉ nào.
+    </div>
+}
+else
+{
+    <table class="table table-striped table-bordered mt-3">
+        <thead class="table-light">
+            <tr>
+                <th>Tên tín chỉ</th>
+                <th>Số tín chỉ</th>
+                <th>Trạng thái</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.TinChi?.TenTinChi</td>
+                    <td>@item.SoTinDaDangKy</td>
+                    <td>
+                        @if (item.TrangThai)
+                        {
+                            <span class="badge bg-success">Hoàn thành</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-warning text-dark">Đã đăng ký</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <a asp-action="Index" class="btn btn-primary mt-3">Đăng ký thêm tín chỉ</a>
+}

@@ -1,0 +1,41 @@
+﻿@model List<DKTinChi.Models.modelTinChi>
+
+@{
+    ViewData["Title"] = "Đăng ký tín chỉ";
+}
+
+<h2>Đăng ký tín chỉ</h2>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">
+        Bạn đã đăng ký tất cả các tín chỉ.
+    </div>
+}
+else
+{
+    <form asp-action="DangKi" method="post">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Chọn</th>
+                    <th>Tên tín chỉ</th>
+                    <th>Số tín chỉ</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var tc in Model)
+                {
+                    <tr>
+                        <td><input type="checkbox" name="selectedTinChi" value="@tc.IdTinChi" /></td>
+                        <td>@tc.TenTinChi</td>
+                        <td>@tc.SoTinChi</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <button type="submit" class="btn btn-primary">Đăng ký</button>
+        <a asp-action="DanhSach" class="btn btn-secondary ms-2">Xem danh sách đã đăng ký</a>
+    </form>
+}
